@@ -28,7 +28,12 @@ async function request(path, options = {}) {
 export const sendMessage = (sessionId, message, userId = "guest") =>
   request("/chat", {
     method: "POST",
-    body: JSON.stringify({ sessionId, message, userId }),
+    body: JSON.stringify({
+      sessionId,
+      message,
+      userId,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    }),
   });
 
 export const fetchHistory = (sessionId) => request(`/history/${sessionId}`);
